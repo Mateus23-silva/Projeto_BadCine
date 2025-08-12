@@ -1,14 +1,8 @@
 package br.com.badcine.dao;
 
-import br.com.badcine.model.Administrador;
-import br.com.badcine.model.Cliente;
-import br.com.badcine.model.Usuario;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import br.com.badcine.model.*;
+import java.io.*;
+import java.nio.charset.StandardCharsets; // Import importante
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +11,8 @@ public class UsuarioDAO {
 
     public List<Usuario> carregar() {
         List<Usuario> usuarios = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
+        // Usa um InputStreamReader para especificar a codificação
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(FILE_PATH), StandardCharsets.UTF_8))) {
             br.readLine();
             String line;
             while ((line = br.readLine()) != null) {
@@ -29,7 +24,6 @@ public class UsuarioDAO {
                 if ("ADMIN".equals(values[0])) {
                     usuarios.add(new Administrador(id, nome, login, senha));
                 } else if ("CLIENTE".equals(values[0])) {
-                    // Agora passa o email (coluna 5) para o construtor
                     usuarios.add(new Cliente(id, nome, login, senha, values[5]));
                 }
             }
@@ -40,20 +34,13 @@ public class UsuarioDAO {
     }
 
     public void salvar(List<Usuario> usuarios) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH))) {
-            bw.write("TIPO;ID;NOME;LOGIN;SENHA;EMAIL\n"); // Cabeçalho atualizado
+        // Usa um OutputStreamWriter para especificar a codificação
+        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(FILE_PATH), StandardCharsets.UTF_8))) {
+            bw.write("TIPO;ID;NOME;LOGIN;SENHA;EMAIL\n");
             for (Usuario usuario : usuarios) {
                 String tipo = (usuario instanceof Administrador) ? "ADMIN" : "CLIENTE";
-                // Agora pega o email em vez do CPF
                 String email = (usuario instanceof Cliente) ? ((Cliente) usuario).getEmail() : "";
-
-                String line = String.join(";",
-                        tipo,
-                        String.valueOf(usuario.getId()),
-                        usuario.getNome(),
-                        usuario.getLogin(),
-                        usuario.getSenha(),
-                        email); // Salva o email
+                String line = String.join(";", tipo, String.valueOf(usuario.getId()), usuario.getNome(), usuario.getLogin(), usuario.getSenha(), email);
                 bw.write(line);
                 bw.newLine();
             }
