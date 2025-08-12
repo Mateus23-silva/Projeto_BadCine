@@ -36,16 +36,22 @@ public class CatalogoController {
                 .filter(filme -> filme.getQuantidadeEmEstoque() > 0)
                 .collect(Collectors.toList());
 
+        System.out.println("Encontrados " + masterList.size() + " filmes com estoque para exibir.");
         atualizarGrade(masterList);
     }
 
     private void atualizarGrade(List<Filme> filmesParaMostrar) {
         gradeDeFilmes.getChildren().clear();
+        if (filmesParaMostrar.isEmpty()) {
+            System.out.println("Nenhum filme para mostrar na grade.");
+            return;
+        }
+
         try {
             for (Filme filme : filmesParaMostrar) {
                 URL fxmlUrl = getClass().getResource("/filme-card.fxml");
                 if (fxmlUrl == null) {
-                    System.err.println("ERRO CRÍTICO: Não foi possível encontrar 'filme-card.fxml'.");
+                    System.err.println("ERRO CRÍTICO: O arquivo 'filme-card.fxml' não foi encontrado na raiz de resources.");
                     continue;
                 }
 
@@ -59,6 +65,7 @@ public class CatalogoController {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            System.err.println("Ocorreu um erro ao carregar o FXML dos cards de filme.");
         }
     }
 
@@ -90,7 +97,6 @@ public class CatalogoController {
         }
     }
 
-    // --- MÉTODO CORRIGIDO E REIMPLEMENTADO ---
     @FXML
     private void handleLogout() {
         Sistema.getInstance().limparCarrinho();
@@ -100,7 +106,6 @@ public class CatalogoController {
             e.printStackTrace();
         }
     }
-    // -----------------------------------------
 
     public void updateCarrinhoButton() {
         int totalItens = Sistema.getInstance().getItensDoCarrinho().size();

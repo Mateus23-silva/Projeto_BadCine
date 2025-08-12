@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.List;
 
 public class FilmeCardController {
 
@@ -29,49 +30,43 @@ public class FilmeCardController {
         tituloLabel.setText(filme.getTitulo());
         precoLabel.setText(String.format("R$ %.2f", filme.getPrecoAluguel()));
 
-        Image poster = carregarImagemExterna(filme.getPosterPath());
+        // Tenta carregar a imagem externa
+        File arquivoImagem = new File("imagens/" + filme.getPosterPath());
+        Image poster;
+
+        if (arquivoImagem.exists()) {
+            poster = new Image(arquivoImagem.toURI().toString());
+        } else {
+            // Se falhar, carrega a imagem padrão de dentro dos resources
+            System.err.println("AVISO: Imagem '" + filme.getPosterPath() + "' não encontrada em /imagens/. Usando imagem padrão.");
+            try (InputStream defaultStream = getClass().getResourceAsStream("/default.png")) {
+                if (defaultStream != null) {
+                    poster = new Image(defaultStream);
+                } else {
+                    System.err.println("ERRO CRÍTICO: Imagem padrão 'default.png' não foi encontrada nos resources.");
+                    poster = null; // Nenhuma imagem será exibida
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                poster = null;
+            }
+        }
         posterImageView.setImage(poster);
     }
 
-    private Image carregarImagemExterna(String nomeArquivo) {
-        try {
-            File arquivoImagem = new File("imagens/" + nomeArquivo);
-            if (arquivoImagem.exists()) {
-                return new Image(arquivoImagem.toURI().toString());
-            } else {
-                System.err.println("AVISO: Imagem '" + nomeArquivo + "' não encontrada na pasta 'imagens'. Usando imagem padrão.");
-                return carregarImagemPadrao();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return carregarImagemPadrao();
-        }
-    }
-
-    private Image carregarImagemPadrao() {
-        // A imagem padrão pode ficar dentro dos resources, pois é parte da aplicação
-        try (InputStream defaultStream = getClass().getResourceAsStream("/default.png")) { // Assumindo que default.png está na raiz de resources
-            if (defaultStream != null) {
-                return new Image(defaultStream);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.err.println("ERRO CRÍTICO: Imagem padrão 'default.png' não foi encontrada nos resources.");
-        return null;
-    }
-
-    // --- CÓDIGO FALTANTE QUE FOI REINSERIDO ---
     @FXML
     private void handleAlugar() {
-        // 1. Adiciona o filme ao carrinho na classe Sistema
-        Sistema.getInstance().adicionarAoCarrinho(filme);
-
-        // 2. Chama o método no CatalogoController para atualizar o contador do botão
-        catalogoController.updateCarrinhoButton();
-
-        // 3. Mostra uma confirmação para o usuário
-        showAlert(Alert.AlertType.INFORMATION, "Sucesso", "'" + filme.getTitulo() + "' foi adicionado ao seu carrinho!");
+        List<Filme> itensNoCarrinho = Sistema.getInstance().getItensDoCarrinho();
+        long quantidadeNoCarrinho = itensNoCarrinho.stream()
+                .filter(item -> item.getId() == this.filme.getId())
+                .count();
+        if (quantidadeNoCarrinho >= this.filme.getQuantidadeEmEstoque()) {
+            showAlert(Alert.AlertType.WARNING, "Estoque Insuficiente", "Não há mais cópias de '" + this.filme.getTitulo() + "' disponíveis para adicionar ao carrinho.");
+        } else {
+            Sistema.getInstance().adicionarAoCarrinho(this.filme);
+            catalogoController.updateCarrinhoButton();
+            showAlert(Alert.AlertType.INFORMATION, "Sucesso", "'" + this.filme.getTitulo() + "' foi adicionado ao seu carrinho!");
+        }
     }
 
     private void showAlert(Alert.AlertType type, String title, String content) {
@@ -81,5 +76,4 @@ public class FilmeCardController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-    // --- FIM DO CÓDIGO FALTANTE ---
 }
