@@ -1,0 +1,5 @@
+TIPO;ID;NOME;LOGIN;SENHA;EMAIL
+ADMIN;1;Administrador;admin;777;
+CLIENTE;2;Mateus Miranda;mateus;123;123.456.789-00
+CLIENTE;3;Ana Laura;ana;456;987.654.321-11
+CLIENTE;4;Pedro Henrrique;pedro;222;pedro@gmail.com
