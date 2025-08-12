@@ -4,13 +4,16 @@ import br.com.badcine.dao.FilmeDAO;
 import br.com.badcine.dao.UsuarioDAO;
 import br.com.badcine.exception.EstoqueInsuficienteException;
 import br.com.badcine.exception.LoginInvalidoException;
-import br.com.badcine.model.*;
+import br.com.badcine.model.Administrador;
+import br.com.badcine.model.Cliente;
+import br.com.badcine.model.Filme;
+import br.com.badcine.model.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class  Sistema {
+public class Sistema {
     private static Sistema instance;
     private List<Usuario> usuarios;
     private List<Filme> filmes;
@@ -54,8 +57,17 @@ public class  Sistema {
         salvarDadosFilmes();
     }
 
+    /**
+     * Calcula o próximo ID disponível para um novo filme.
+     * Útil para gerar nomes de arquivo de imagem únicos.
+     * @return O próximo ID de filme.
+     */
+    public int getProximoIdFilme() {
+        return filmes.stream().mapToInt(Filme::getId).max().orElse(0) + 1;
+    }
+
     public void adicionarFilme(String titulo, String genero, int ano, double preco, int estoque, String posterPath) {
-        int novoId = filmes.stream().mapToInt(Filme::getId).max().orElse(0) + 1;
+        int novoId = getProximoIdFilme();
         Filme novoFilme = new Filme(novoId, titulo, genero, ano, preco, estoque, posterPath);
         this.filmes.add(novoFilme);
         salvarDadosFilmes();
@@ -70,7 +82,6 @@ public class  Sistema {
         salvarDadosFilmes();
     }
 
-    // Assinatura do método ATUALIZADA
     public void cadastrarNovoCliente(String nome, String email, String login, String senha) throws Exception {
         boolean loginJaExiste = usuarios.stream().anyMatch(u -> u.getLogin().equalsIgnoreCase(login));
         if (loginJaExiste) {
@@ -78,7 +89,6 @@ public class  Sistema {
         }
 
         int novoId = usuarios.stream().mapToInt(Usuario::getId).max().orElse(0) + 1;
-        // Agora cria o Cliente com o email
         Cliente novoCliente = new Cliente(novoId, nome, login, senha, email);
 
         this.usuarios.add(novoCliente);

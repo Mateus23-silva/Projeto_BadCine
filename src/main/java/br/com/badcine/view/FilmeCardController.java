@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import java.io.File;
 import java.io.InputStream;
 
 public class FilmeCardController {
@@ -27,29 +29,49 @@ public class FilmeCardController {
         tituloLabel.setText(filme.getTitulo());
         precoLabel.setText(String.format("R$ %.2f", filme.getPrecoAluguel()));
 
-        // Procura as imagens na pasta 'imagens' que está na raiz de 'resources'
-        String imagePath = "/imagens/" + filme.getPosterPath();
-        String imagePathDefault = "/imagens/default.png";
+        Image poster = carregarImagemExterna(filme.getPosterPath());
+        posterImageView.setImage(poster);
+    }
 
-        InputStream imageStream = getClass().getResourceAsStream(imagePath);
-
-        if (imageStream == null) {
-            System.err.println("AVISO: Imagem '" + filme.getPosterPath() + "' não encontrada. Usando imagem padrão.");
-            imageStream = getClass().getResourceAsStream(imagePathDefault);
-        }
-
-        if (imageStream != null) {
-            posterImageView.setImage(new Image(imageStream));
-        } else {
-            System.err.println("ERRO CRÍTICO: Imagem padrão 'default.png' também não foi encontrada.");
+    private Image carregarImagemExterna(String nomeArquivo) {
+        try {
+            File arquivoImagem = new File("imagens/" + nomeArquivo);
+            if (arquivoImagem.exists()) {
+                return new Image(arquivoImagem.toURI().toString());
+            } else {
+                System.err.println("AVISO: Imagem '" + nomeArquivo + "' não encontrada na pasta 'imagens'. Usando imagem padrão.");
+                return carregarImagemPadrao();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return carregarImagemPadrao();
         }
     }
 
+    private Image carregarImagemPadrao() {
+        // A imagem padrão pode ficar dentro dos resources, pois é parte da aplicação
+        try (InputStream defaultStream = getClass().getResourceAsStream("/default.png")) { // Assumindo que default.png está na raiz de resources
+            if (defaultStream != null) {
+                return new Image(defaultStream);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.err.println("ERRO CRÍTICO: Imagem padrão 'default.png' não foi encontrada nos resources.");
+        return null;
+    }
+
+    // --- CÓDIGO FALTANTE QUE FOI REINSERIDO ---
     @FXML
     private void handleAlugar() {
+        // 1. Adiciona o filme ao carrinho na classe Sistema
         Sistema.getInstance().adicionarAoCarrinho(filme);
+
+        // 2. Chama o método no CatalogoController para atualizar o contador do botão
         catalogoController.updateCarrinhoButton();
-        showAlert(Alert.AlertType.INFORMATION, "Sucesso", "'" + filme.getTitulo() + "' foi adicionado ao carrinho!");
+
+        // 3. Mostra uma confirmação para o usuário
+        showAlert(Alert.AlertType.INFORMATION, "Sucesso", "'" + filme.getTitulo() + "' foi adicionado ao seu carrinho!");
     }
 
     private void showAlert(Alert.AlertType type, String title, String content) {
@@ -59,4 +81,5 @@ public class FilmeCardController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+    // --- FIM DO CÓDIGO FALTANTE ---
 }
