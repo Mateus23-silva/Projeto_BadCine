@@ -54,7 +54,7 @@ O projeto utiliza o **Gradle** para gerenciar as dependências e o processo de b
 
 1.  **Clone o Repositório:**
     ```bash
-    git clone 
+    git clone [https://github.com/Mateus23-silva/Projeto_BadCine]
     ```
     *(Lembre-se de substituir pela URL real do seu repositório)*
 
@@ -93,3 +93,14 @@ Você pode usar as seguintes credenciais para testar a aplicação:
 _Você também pode criar novos usuários através da tela de cadastro._
 
 ---
+
+## 🖼️ Screenshots
+
+**Tela de Login:**
+![Tela de Login](screenshots/login.jpg)
+
+**Catálogo de Filmes:**
+![Catálogo de Filmes](screenshots/catalogo.jpg)
+
+**Painel do Administrador:**
+![Painel do Administrador](screenshots/administrador.jpg)
