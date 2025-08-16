@@ -1,31 +1,19 @@
-/* ======================================= */
-/* === Estilo Global para a Aplicação BadCine === */
-/* ======================================= */
-
-/* --- Estilo base para todas as janelas --- */
 .root {
-    -fx-background-color: #2B2B2B; /* Cinza escuro para o fundo */
+    -fx-background-color: #2B2B2B;
     -fx-font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* --- Estilo para todos os Labels --- */
 .label {
-    -fx-text-fill: #E0E0E0; /* Branco/Cinza claro para o texto */
+    -fx-text-fill: #E0E0E0;
     -fx-font-size: 14px;
 }
 
-/* --- Estilo para os Títulos Principais --- */
 .titulo-principal {
     -fx-font-size: 28px;
     -fx-font-weight: bold;
     -fx-text-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, #D32F2F, #B71C1C); /* Gradiente Vermelho Metálico */
 }
 
-/* ================================ */
-/* === Estilo para os Botões      === */
-/* ================================ */
-
-/* --- Estilo base para todos os botões --- */
 .button {
     -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #A02424 0%, #B71C1C 100%),
                           #C62828,
@@ -64,10 +52,6 @@
                           radial-gradient(center 50% 50%, radius 100%, #C8E6C9, #A5D6A7);
 }
 
-/* ================================================= */
-/* === ESTILOS PARA AS TABELAS (TELA DE ADMIN)  === */
-/* ================================================= */
-
 .table-view { -fx-base: #2B2B2B; -fx-control-inner-background: #3c3f41; -fx-background-color: #3c3f41; -fx-table-cell-border-color: transparent; -fx-padding: 5; }
 .table-view .column-header-background { -fx-background-color: linear-gradient(to bottom, #424242, #383838); }
 .table-view .column-header, .table-view .filler { -fx-background-color: transparent; -fx-size: 35; -fx-border-width: 0 0 1 0; -fx-border-color: #555555; }
@@ -78,10 +62,6 @@
 .table-cell { -fx-text-fill: #DDDDDD; -fx-font-size: 13px; -fx-border-color: transparent; -fx-padding: 4px; }
 .table-view .scroll-bar:vertical .thumb, .table-view .scroll-bar:horizontal .thumb { -fx-background-color: #666666; -fx-background-radius: 5em; }
 .table-view .scroll-bar:vertical, .table-view .scroll-bar:horizontal { -fx-background-color: #3c3f41; }
-
-/* ================================================= */
-/* === ESTILOS NOVOS PARA OS CARDS DE FILMES       === */
-/* ================================================= */
 
 .card-filme {
     -fx-background-color: #3c3f41;
@@ -100,11 +80,11 @@
     -fx-text-fill: white;
     -fx-font-size: 13px;
     -fx-text-alignment: center;
-    -fx-min-height: 40px; /* Garante altura mínima para títulos de 2 linhas */
+    -fx-min-height: 40px;
 }
 
 .card-filme .label-preco {
     -fx-font-weight: bold;
-    -fx-text-fill: #4CAF50; /* Verde para destacar o preço */
+    -fx-text-fill: #4CAF50;
     -fx-font-size: 14px;
 }

@@ -15,7 +15,6 @@ public class BadCineApp extends Application {
     public void start(Stage primaryStage) throws IOException {
         Sistema.getInstance().iniciar();
 
-        // Procura o FXML na raiz de 'resources'
         URL fxmlUrl = getClass().getResource("/login-view.fxml");
         if (fxmlUrl == null) {
             System.err.println("ERRO CRÍTICO: Não foi possível encontrar 'login-view.fxml' na raiz de resources.");
@@ -25,7 +24,6 @@ public class BadCineApp extends Application {
         Parent root = FXMLLoader.load(fxmlUrl);
         Scene scene = new Scene(root);
 
-        // Procura o CSS na raiz de 'resources'
         URL cssUrl = getClass().getResource("/style.css");
         if(cssUrl != null) {
             scene.getStylesheets().add(cssUrl.toExternalForm());

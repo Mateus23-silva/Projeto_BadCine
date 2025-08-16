@@ -1,4 +1,4 @@
 TIPO;ID;NOME;LOGIN;SENHA;EMAIL
 ADMIN;1;Administrador;admin;777;
-CLIENTE;2;Mateus Miranda;mateus;123;carlos@email.com
-CLIENTE;3;Ana Beatriz;ana;456;ana.beatriz@email.com
+CLIENTE;1;Mateus Miranda;mateus;123;mateus@email.com
+CLIENTE;2;Ana Beatriz;ana;456;ana.beatriz@email.com

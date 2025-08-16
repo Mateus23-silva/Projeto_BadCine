@@ -57,11 +57,7 @@ public class Sistema {
         salvarDadosFilmes();
     }
 
-    /**
-     * Calcula o próximo ID disponível para um novo filme.
-     * Útil para gerar nomes de arquivo de imagem únicos.
-     * @return O próximo ID de filme.
-     */
+    
     public int getProximoIdFilme() {
         return filmes.stream().mapToInt(Filme::getId).max().orElse(0) + 1;
     }

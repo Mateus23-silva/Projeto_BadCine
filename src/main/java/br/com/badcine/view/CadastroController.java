@@ -19,7 +19,6 @@ public class CadastroController {
     private void handleCadastrar() {
         if (isInputValid()) {
             try {
-                // Agora passa o email em vez do CPF
                 Sistema.getInstance().cadastrarNovoCliente(
                         nomeField.getText(),
                         emailField.getText(),

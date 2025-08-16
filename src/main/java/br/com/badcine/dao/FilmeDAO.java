@@ -11,7 +11,6 @@ public class FilmeDAO {
 
     public List<Filme> carregar() {
         List<Filme> filmes = new ArrayList<>();
-        // Usa um InputStreamReader para especificar a codificação
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(FILE_PATH), StandardCharsets.UTF_8))) {
             br.readLine();
             String line;
@@ -26,7 +25,6 @@ public class FilmeDAO {
     }
 
     public void salvar(List<Filme> filmes) {
-        // Usa um OutputStreamWriter para especificar a codificação
         try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(FILE_PATH), StandardCharsets.UTF_8))) {
             bw.write("ID;TITULO;GENERO;ANO;PRECO;ESTOQUE;POSTER_PATH\n");
             for (Filme filme : filmes) {

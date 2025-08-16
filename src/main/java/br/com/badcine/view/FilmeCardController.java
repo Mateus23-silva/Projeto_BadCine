@@ -30,14 +30,12 @@ public class FilmeCardController {
         tituloLabel.setText(filme.getTitulo());
         precoLabel.setText(String.format("R$ %.2f", filme.getPrecoAluguel()));
 
-        // Tenta carregar a imagem externa
         File arquivoImagem = new File("imagens/" + filme.getPosterPath());
         Image poster;
 
         if (arquivoImagem.exists()) {
             poster = new Image(arquivoImagem.toURI().toString());
         } else {
-            // Se falhar, carrega a imagem padrão de dentro dos resources
             System.err.println("AVISO: Imagem '" + filme.getPosterPath() + "' não encontrada em /imagens/. Usando imagem padrão.");
             try (InputStream defaultStream = getClass().getResourceAsStream("/default.png")) {
                 if (defaultStream != null) {

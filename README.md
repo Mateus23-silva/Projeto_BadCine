@@ -55,7 +55,7 @@ A forma mais fácil de executar o projeto é usando o pacote de distribuição (
 1.  **Pré-requisito:** Certifique-se de ter o **Java (JRE ou JDK) versão 17 ou superior** instalado em sua máquina.
 
 2.  **Baixe o Projeto:**
-    - Vá para a seção **"Releases"** deste repositório no GitHub e baixe o arquivo `BadCine-Entrega.zip`.
+    - Vá para a seção **"Releases"** deste repositório no GitHub e baixe o arquivo `BadCine-Final.zip`.
     - Ou, clone o repositório e encontre o arquivo `BadCine-1.0.jar` na raiz.
 
 3.  **Prepare o Ambiente (se não baixou o .zip):**

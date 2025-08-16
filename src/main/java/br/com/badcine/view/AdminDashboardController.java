@@ -22,7 +22,6 @@ import java.util.Optional;
 
 public class AdminDashboardController {
 
-    // --- DECLARAÇÕES QUE ESTAVAM FALTANDO ---
     @FXML private TableView<Filme> tabelaFilmes;
     @FXML private TableColumn<Filme, Integer> colunaId;
     @FXML private TableColumn<Filme, String> colunaTitulo;
@@ -30,7 +29,6 @@ public class AdminDashboardController {
     @FXML private TableColumn<Filme, Integer> colunaAno;
     @FXML private TableColumn<Filme, Double> colunaPreco;
     @FXML private TableColumn<Filme, Integer> colunaEstoque;
-    // ------------------------------------------
 
     private final ObservableList<Filme> listaFilmes = FXCollections.observableArrayList();
 

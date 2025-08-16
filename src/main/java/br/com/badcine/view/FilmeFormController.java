@@ -117,9 +117,8 @@ public class FilmeFormController {
         }
     }
 
-    // ... (resto dos métodos handleCancelar, isInputValid, getStage, showAlert) ...
     @FXML private void handleCancelar() { getStage().close(); }
-    private boolean isInputValid() { /* ... código existente ... */ return true; }
+    private boolean isInputValid() { return true; }
     private Stage getStage() { if(dialogStage == null) { dialogStage = (Stage) tituloField.getScene().getWindow(); } return dialogStage; }
-    private void showAlert(Alert.AlertType type, String title, String content) { /* ... código existente ... */ }
+    private void showAlert(Alert.AlertType type, String title, String content) { }
 }

@@ -2,7 +2,7 @@ package br.com.badcine.dao;
 
 import br.com.badcine.model.*;
 import java.io.*;
-import java.nio.charset.StandardCharsets; // Import importante
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +11,6 @@ public class UsuarioDAO {
 
     public List<Usuario> carregar() {
         List<Usuario> usuarios = new ArrayList<>();
-        // Usa um InputStreamReader para especificar a codificação
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(FILE_PATH), StandardCharsets.UTF_8))) {
             br.readLine();
             String line;
@@ -34,7 +33,6 @@ public class UsuarioDAO {
     }
 
     public void salvar(List<Usuario> usuarios) {
-        // Usa um OutputStreamWriter para especificar a codificação
         try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(FILE_PATH), StandardCharsets.UTF_8))) {
             bw.write("TIPO;ID;NOME;LOGIN;SENHA;EMAIL\n");
             for (Usuario usuario : usuarios) {

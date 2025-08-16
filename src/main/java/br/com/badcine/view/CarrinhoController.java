@@ -79,10 +79,8 @@ public class CarrinhoController {
             return;
         }
 
-        // Chama o método no Sistema para remover o item da lista
         Sistema.getInstance().removerDoCarrinho(filmeSelecionado);
 
-        // Atualiza a interface gráfica
         atualizarTabelaEtotal();
         showAlert(Alert.AlertType.INFORMATION, "Item Removido", "'" + filmeSelecionado.getTitulo() + "' foi removido do seu carrinho.");
     }
