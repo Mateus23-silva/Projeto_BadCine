@@ -67,7 +67,7 @@ A forma mais fácil de executar o projeto é usando o pacote de distribuição (
     - Abra um terminal (CMD, PowerShell, Git Bash, etc.) **dentro da pasta de entrega**.
     - Digite o seguinte comando e pressione Enter:
       ```bash
-      
+      java -jar BadCine-1.0.jar
       ```
     - A aplicação será iniciada.
 
