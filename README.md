@@ -48,33 +48,28 @@ _O **JavaFX SDK não é mais necessário** ser baixado separadamente, pois o Gra
 
 ---
 
-## 🚀 Configuração e Execução
+## 🚀 Executando a Aplicação
 
-O projeto utiliza o **Gradle** para gerenciar as dependências e o processo de build, tornando a configuração muito mais simples.
+A forma mais fácil de executar o projeto é usando o pacote de distribuição (`.jar`) fornecido.
 
-1.  **Clone o Repositório:**
-    ```bash
-    git clone [https://github.com/Mateus23-silva/Projeto_BadCine]
-    ```
-    *(Lembre-se de substituir pela URL real do seu repositório)*
+1.  **Pré-requisito:** Certifique-se de ter o **Java (JRE ou JDK) versão 17 ou superior** instalado em sua máquina.
 
-2.  **Abra no IntelliJ IDEA:**
-    - Abra o IntelliJ e selecione `File -> Open...`.
-    - Navegue até a pasta do projeto clonado e selecione o arquivo `build.gradle`. Clique em `OK`.
-    - O IntelliJ perguntará se você confia no projeto. Clique em **"Trust Project"**.
-    - O IntelliJ irá automaticamente detectar que é um projeto Gradle e começará a sincronizar e baixar as dependências (incluindo o JavaFX). Aguarde este processo terminar.
+2.  **Baixe o Projeto:**
+    - Vá para a seção **"Releases"** deste repositório no GitHub e baixe o arquivo `BadCine-Entrega.zip`.
+    - Ou, clone o repositório e encontre o arquivo `BadCine-1.0.jar` na raiz.
 
-3.  **Execute a Aplicação:**
-    - No canto superior direito da janela do IntelliJ, você encontrará uma configuração de execução já pronta, provavelmente chamada **`Executar`** ou **`BadCine [run]`**.
-    - Certifique-se de que esta configuração está selecionada.
-    - Clique no botão verde de **Play (▶️)** ao lado dela.
+3.  **Prepare o Ambiente (se não baixou o .zip):**
+    - Crie uma pasta em seu computador.
+    - Coloque o arquivo `BadCine-1.0.jar` dentro dela.
+    - Copie as pastas `data` e `imagens` do repositório para dentro desta mesma pasta.
 
-    _O Gradle irá compilar e executar a aplicação. A tela de login do BadCine aparecerá em instantes._
-
-    **Alternativa (se a configuração não aparecer):**
-    - No lado direito da janela, abra a aba vertical **`Gradle`**.
-    - Navegue por `Tasks -> application`.
-    - Dê um duplo-clique na tarefa **`run`**.
+4.  **Execute via Linha de Comando:**
+    - Abra um terminal (CMD, PowerShell, Git Bash, etc.) **dentro da pasta de entrega**.
+    - Digite o seguinte comando e pressione Enter:
+      ```bash
+      java -jar BadCine-1.0.jar
+      ```
+    - A aplicação será iniciada.
 
 ---
 
