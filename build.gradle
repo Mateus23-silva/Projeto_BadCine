@@ -12,9 +12,8 @@ repositories {
   mavenCentral()
 }
 
-// A classe principal para a tarefa 'run' e para o MANIFEST
 application {
-  mainClass = 'br.com.badcine.Main' // Aponta para a nossa nova classe launcher
+  mainClass = 'br.com.badcine.Main'
 }
 
 javafx {
@@ -26,5 +25,4 @@ shadowJar {
   archiveBaseName = 'BadCine'
   archiveClassifier = ''
   archiveVersion = '1.0'
-  // O MANIFEST será configurado automaticamente pelo bloco 'application' acima
 }
